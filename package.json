@@ -1,0 +1,19 @@
+{
+  "name": "email-cadence-temporal",
+  "version": "1.0.0",
+  "description": "code assesstment",
+  "private":"true",
+  "workspaces":["apps/*"],
+  "license": "ISC",
+  "author": "Rowell Nino Dinolan",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:web\" \"npm run dev:api\" \"npm run dev:worker\"",
+    "dev:web": "npm --workspace apps/web run dev",
+    "dev:api": "npm --workspace apps/api run start:dev",
+    "dev:worker": "npm --workspace apps/worker run dev"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "typescript": "^5.3.3"
+  }
+}
