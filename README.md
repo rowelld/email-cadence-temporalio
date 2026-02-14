@@ -1,4 +1,4 @@
-# Email Cadence – Temporal (TypeScript Monorepo)
+# Email Cadence – Temporalio
 
 Small demo app that creates an email cadence, enrolls a contact, runs the cadence via Temporal workflows, and supports live cadence updates while the workflow is running.
 
