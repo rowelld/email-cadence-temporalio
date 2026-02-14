@@ -1,4 +1,4 @@
-# Email Cadence – Temporalio
+# Email Cadence - Temporalio
 
 Small demo app that creates an email cadence, enrolls a contact, runs the cadence via Temporal workflows, and supports live cadence updates while the workflow is running.
 
@@ -39,6 +39,17 @@ npm run dev:web
 
 The web app runs on `http://localhost:3001` by default.
 
+## API Endpoints
+Cadences:
+`POST /cadences` Create cadence
+`GET /cadences/:id` Get cadence
+`PUT /cadences/:id` Update cadence definition
+
+Enrollments:
+`POST /enrollments` Body `{ cadenceId, contactEmail }` Starts workflow
+`GET /enrollments/:id` Returns current status
+`POST /enrollments/:id/update-cadence` Body `{ steps }` Sends signal to running workflow
+
 ## API Examples
 Create cadence:
 ```bash
@@ -51,6 +62,24 @@ curl -X POST http://localhost:3000/cadences \
       { "id": "1", "type": "SEND_EMAIL", "subject": "Welcome", "body": "Hello there" },
       { "id": "2", "type": "WAIT", "seconds": 10 },
       { "id": "3", "type": "SEND_EMAIL", "subject": "Follow up", "body": "Checking in" }
+    ]
+  }'
+```
+
+Get cadence:
+```bash
+curl http://localhost:3000/cadences/cad_123
+```
+
+Update cadence definition:
+```bash
+curl -X PUT http://localhost:3000/cadences/cad_123 \
+  -H "Content-Type: application/json" \
+  -d '{
+    "id": "cad_123",
+    "name": "Welcome Flow v2",
+    "steps": [
+      { "id": "1", "type": "SEND_EMAIL", "subject": "Updated", "body": "New copy" }
     ]
   }'
 ```
